@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>06_event</title>
+    <script src="js/jquery-3.4.0.js"></script>
+    <style>
+            .outer{
+                width: 200px;
+                height: 200px;
+                background: orange;
+                padding: 20px;
+           
+            }
+            .inner{
+                
+                width: 100%;
+                height: 100%;
+                background: red;
+            }
+            .reverse{
+                background: black;
+                color: white;
+            }
+            </style>
+</head>
+<body>
+    <h2>06_event</h2>
+    <h3>mouseover-mouseout, mouseenter-mouseleave</h3>
+    <ul>
+        <li>
+        mouseover-mouseout : 자식요소 접근시에도 이벤트헨들링됨.
+        </li>
+        <li>
+        mouseenter-mouseleave : 자식요소 접근시에는 이벤트핸들링 되지않음.
+        </li>
+    </ul>
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
+<script>
+// $(".outer").mouseover(function(){
+//   console.log("OVER");
+// });
+
+// $(".outer").mouseout(function(){
+//   console.log("OUT");
+
+// });
+
+$(".outer").mouseenter(function(){
+    console.log("ENTER!");
+});
+$(".outer").mouseleave(function(){
+  console.log("LEAVE!");
+});
+</script>
+
+<h3>hover()</h3>
+<p>mouseenter-mouseleave에 대한 이벤트핸들링을 동시에 한다 </p>
+<h1 id="test1">hover테스트</h1>
+<script>
+$("#test1").hover(function(){
+    console.log("HOVERLMOUSENTER!");
+
+    // $(this).addClass("reverse");
+    $(this).toggleClass("reverse"); //해당 클래스가 없으면, 추가
+                                    //해당 클래스가 있으면, 제거
+
+}, function(){
+    console.log("MOUSELEAVE!");
+    // $(this).removeClass("reverse");
+    $(this).toggleClass("reverse");
+});
+
+</script>
+
+<h3>키보드이벤트</h3>
+<ul>
+    <li>keydown</li>
+    <li>keypress : 기능키(ctrl, Alt, shift등은 사용못함)</li>
+    <li>keyup</li>
+</ul>
+<input type="text" id="test2">
+<script>
+var $test = $("#test2");
+// $test.keydown(function(e){
+//     console.log("keydow:"+e.key);
+// });
+// $test.keyup(function(e){
+//     console.log("keyup: "+e.key);
+// });
+$test.keypress(function(e){
+  console.log("keypress :"+e.key);
+});
+</script>
+
+<h3>동적으로 글자수 세기</h3>
+<p>
+    글자수 초과시에는 제출할 수 없도록 
+    event.preventDefault()를 호출함. 
+</p>
+<form action="javascript:alert('제출성공');">
+    <p><span id="counter">0</span>/30</p>
+    <textarea id="memo" cols="70" rows="5"></textarea>
+    <input type="submit" id="btnSubmit" value="제출">
+</form>
+<script>
+$("#memo").keyup(function(){
+  var len = $(this).val().length;
+  console.log(len);
+$("#counter").html(len);
+  //남은 글자수
+  var remain = 30 -len;
+  if(remain>=0){
+      //허용치
+      $("#counter").css("color","black");
+
+      //버튼 활성화
+      $("#btnSubmit").prop("disabled",false);
+  }
+  else{
+      //허용치를 벗어난 경우
+      $("#counter").css("color","red");
+      // 버튼 비활성
+      $("#btnSubmit").prop("disabled",true);
+  }
+});
+// form submit이벤트
+$("form").submit(function(){
+  //적은 내용이 없거나, 글자수를 초과한 경우. 제출방지
+  var len = $("#memo").val().trim().length;
+  if(len ==0 || len>30){
+     
+      console.log("제출방지!");
+      event.preventDefault();
+  }
+//공백포함 글자수를 초과한 경우
+$("#memo").val($("#memo").val().trim());
+});
+</script>
+</body>
+</html>

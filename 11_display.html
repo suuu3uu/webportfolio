@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>11_display</title>
+    <script src="js/jquery-3.4.0.js"></script>
+</head>
+<body>
+    <h2>11_display</h2>
+    <h3>show() | hide()</h3>
+    <p>
+       선택한 요소를 크게하며 보여주거나, 작게 하며 사라짐
+    </p>
+    <button id="show">보여주기</button>
+    <button id="hide">숨기기</button>
+    <br><br>
+    <img src="sample/image/river1.PNG" id="river1" alt="강사진">
+    <script>
+    $("#show").click(function(){
+           $("#river1").show(2500, function(){
+               //complete함수(callback함수)
+               alert("사진 효과가 완료되었씁니다.")
+           });
+    });
+    $("#hide").click(function(){
+           $("#river1").hide(2500);
+    });
+    
+    
+    </script>
+    
+    <h3>toggle</h3>
+    <button id="toggle">toggle</button>
+    <br><br>
+    <img src="sample/image/river2.PNG" alt="강사진" id="river2">
+    <script>
+    $("#toggle").click(function(){
+        $("#river2").toggle(1000,function(){
+            alert("강사진 효과가 완료되었습니다");
+        });
+    });
+    
+    </script>
+    
+</body>
+</html>

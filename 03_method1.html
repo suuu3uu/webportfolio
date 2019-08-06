@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>03_method1</title>
+    <script src="js/jquery-3.4.0.js"></script>
+</head>
+<body>
+    <h2>03_method1</h2>
+    <h3>attr</h3>
+    <p>
+        문서객체의 특정속성값을 가져오거나, 속성을 추가할때 사용한다.
+        html태그에 명시된 값을 대상으로 하므로,
+        속성값이 기술되어 있지 않으면, undefined를 리턴한다.
+    </p>
+    <img src="sample/image/flower1.PNG" >
+    <br><br>
+    <img src="sample/image/flower2.PNG" >
+    <br><br>
+    <button onclick="test1();">속성변경 실행</button>
+    <script>
+    //getter로 사용하는 attr메소드는 첫번째 요소의 정보를 리턴함.
+    console.log($("img")); //2개의 img태그요소를 가진 jquery객체가 리턴.
+    console.log($("img").attr("src"));
+
+    function test1(){
+     //setter로 사용하는 attr메소드는 모든요소의 속성값을 변경함.
+     // $("img").attr("src","image/tiger.jpg");
+
+     $("img").attr("src",function(index,value){
+           console.log(index,value);
+     });
+    // 여러속성을 한번에 지정가능
+    $("img").attr({
+        "width":"100px",
+        "height":"50px"
+    });
+
+    //속성제거
+     $("img").removeAttr("width");
+
+    }
+    </script>
+
+
+    <h3>prop</h3>
+    <p>
+        속성값을 true/false의 boolean형태로 다룬다.
+        자바스크립트를 통한 동적인 요소제어에 주로 사용된다. 
+    </p>
+    <script>
+    $(function(){
+        // jquery식의 이벤트등록
+        $("[type=checkbox]").change(function(){
+            console.log($(this).prop("checked"));
+            
+           // console.log($(this).attr("checked")); //html요소에 작성된 속성인가
+        });
+        // setter사용
+        $("#pizza").prop("checked",true);
+
+        // @실습문제 : #checkAll 체크시에 메뉴체크박스 전체 제어
+        $("#checkAll").change(function(){
+            var checked = $(this).prop("checked");
+            $("[name=menu").prop("checked",checked); 
+        });
+      
+    });
+    </script>
+    <form action="">
+    <input type="checkbox" id="checkAll">
+    <label for="checkAll">전체선택</label>
+     <input type="checkbox" name="menu" id="pizza">
+     <label for="pizza">피자</label>
+     <input type="checkbox" name="menu" id="chicken">
+     <label for="chicken">치킨</label>
+     <input type="checkbox" name="menu" id="hotdog" checked>
+     <label for="hotdog">핫도그</label>
+
+
+    </form>
+</body>
+</html>

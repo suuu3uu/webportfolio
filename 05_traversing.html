@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>05_traversing</title>
+    <script src="js/jquery-3.4.0.js"></script>
+    <style>
+    .wrap *{
+        border: 1px solid gray;
+        display: block;
+        padding: 5px;
+        margin: 15px;
+        color: gray;
+    }
+    </style>
+</head>
+<body>
+    <h2>05_traversing</h2>
+    <p>순회(탐색)</p>
+
+    <h3>1.ancestor 메소드</h3>
+    <div class="wrap">
+        <div class="type">
+            div(great-grandparent)
+            <ul>
+                ul(grand parent)
+                <li>
+                    li(direct parent)
+                    <span>span1</span>
+                </li>
+                <li>
+                    li(direct parent)
+                    <span>span2</span>
+                </li>
+            </ul>
+    </div>
+    
+    
+    <div class="type">
+        div (grandparent)
+        <p>
+            p(direct parent)
+            <span>span3</span>
+        </p>
+    </div>
+    <div class="type test">
+        div.test
+        <ul>
+            ul1
+            <li>li1</li>
+            <li>
+                li2
+                <ul>
+                    ul2
+                    <li>li2-1</li>
+                    <li>li2-2</li>
+                    <li>
+                        li2-3
+                        <ul>
+                            ul3
+                            <li>
+                                li3
+                                <span id="fromMe">fromMe!!</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        </div>
+    </div>
+    
+    <h3>1.ancestor 메소드</h3>
+    <ul>
+        <li>parent(): 직계부모</li>
+        <li>parents([selector]):모든 조상 혹은 특정 조상</li>
+        <li>parentsUntil(selector):특정조상 전 모든 조상</li>
+    </ul>
+    <script>
+        var style ={
+            color: "red",
+            border: "2px solid red"
+        }
+
+        //직계부모요소 선택
+        $("span").eq(1).parent().css(style);
+
+        //모든 상위요소선택
+        // $("span").eq(0).parents().css(style);
+        // $("span").parents("ul").css(style);
+        console.log($("span").parents("ul"));
+    
+        //선택된 요소부터 지정된 부모요소 전까지 모든요소
+        // $("span").parentsUntil("div").css(style)
+        //  $("#fromMe").parents("ul").eq(2).css(style);
+       
+         
+    </script>
+
+      <h3>2.descendant 메소드</h3>
+      <ul>
+          <li>children([selector]): 직계자식</li>
+          <li>find(selector): 후손</li>
+      </ul>
+    <script>
+    //직계자식
+    // $(".wrap").children().css(style);
+    console.log($(".wrap").children());
+    $(".wrap").children().children().css(style);
+    
+    //후손
+    // $(".wrap").find("ul").css(style);
+
+    //@실습문제 : .wrap로부터 페이지내 모든 span요소 찾아 스타일변경
+    // $(".wrap").find("span").css(style);
+
+    //@실습문제 : .wrap으로부터 li2-2찾기, #fromMe로부터 li2-2찾기
+    // $(".wrap").find("li").eq(5).css(style);
+    // $(".wrap").find("li").children().children().eq(1).css(style);
+
+   // $("#fromMe").parents("li").children().find("li").eq(1).css(style);
+    // $("#fromMe").parents("ul>li>ul").children().css(style);
+    </script>
+    <h3>3.siblings 메소드</h3>
+    <ul>
+        <li>siblings([selector])</li>
+        <li>next()</li>
+        <li>nextAll([selector])</li>
+        <li>nextUntil([selector])</li>
+        <li>prev</li>
+        <li>prevAll([selector])</li>
+        <li>prevUntill([selector])</li>
+    </ul>
+    <div class="wrap">
+   div(parent)
+   <p>p</p>
+   <span>span</span>
+   <h1>h1</h1>
+   <h2>h2</h2>
+   <h3>h3</h3>
+   <h4>h4</h4>
+   <p>p</p>
+    </div>
+<script>
+    var $h2 = $(".wrap h2");
+//형제요소 전체를 가리킴(본인빼고)
+// $(".wrap h2").siblings().css(style);
+// $(".wrap h2").siblings("p").css(style);
+
+
+//next: 다음 하나를 가리킴
+// $h2.next().css(style);
+// $h2.nextAll().css(style);
+//h2~p 사이만
+// $h2.nextUntil("p").css(style);
+
+//prev : 이전
+// $h2.prev().css(style);
+// $h2.prevAll().css(style);
+// $h2.prevUntil("p").css(style);
+
+//@ 실습문제 : li2-2, li2-3에 대해서 스타일 적용
+// $(".wrap ul").eq(2).children().eq(0).siblings().css(style);
+$("#fromMe").parents("ul").eq(1).children("li:eq(0)").nextAll().css(style);
+</script>
+
+
+
+
+
+</body>
+</html>

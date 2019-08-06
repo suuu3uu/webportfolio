@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>13_fade</title>
+    <script src="js/jquery-3.4.0.js"></script>
+</head>
+<body>
+    <h2>13_fade</h2>
+    <h3>fadeIn() || fadeOut()</h3>
+    <button id="fadeIn">fadeIn</button>
+    <button id="fadeOut">fadeOut</button>
+    <button id="fadeToggle">fadeToggle</button>
+    <img src="sample/image/flower1.PNG" alt="" id="flower">
+    <script>
+    $("#fadeIn").on("click",function(){
+            $("#flower").fadeIn(2000);
+    });
+    $("#fadeOut").on("click",function(){
+            $("#flower").fadeOut(5000);
+    });
+    $("#fadeToggle").on("click",function(){
+            $("#flower").fadeToggle(2000,function(){
+                      //complete함수
+                    console.log("토글완료!!");
+            });
+    });
+    
+    </script>
+
+    <h3>fadeTo</h3>
+    <div class="wrap">
+        <img src="sample/image/flower2.PNG" alt="" id="flower2">
+    </div>
+    <style>
+    #flower2{
+        opacity: .4;
+    }
+    </style>
+    <script>
+    $("#flower2").hover(function(){
+         //mouseenter
+         $(this).fadeTo(700,1);
+
+        },function(){
+        //mouseleave
+        $(this).fadeTo(700,.4);
+    });
+    
+    </script>
+</body>
+</html>

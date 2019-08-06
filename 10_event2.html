@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>10_event2</title>
+    <script src="js/jquery-3.4.0.js"></script>
+</head>
+<body>
+    <h2>10_event2</h2>
+    <h3>이벤트객체제어</h3>
+    <button id="btn1" onclick="test1(event);">버튼1</button>
+    <button id="btn2">버튼2</button>
+    <script>
+    // 일반함수를 이벤트핸들러로 등록한 경우, this는 window전역개체이다.
+    function test1(e){
+        var event = e || window.event;
+        var btn = event.target;
+
+        //jquery객체 
+       alert($(event.target).html());
+       
+       //$(this) : window
+       console.log($(this));
+    }
+
+
+    //click이벤트에 핸들러함수로 등록
+    $("#btn2").click(function(e){
+     var event = e || window.event;
+     var btn = event.target;
+     alert($(btn).html());
+
+     //$(this) : 이벤트발생객체
+     console.log($(this));
+    });
+
+    
+    </script>
+
+    <h3>이벤트 연결함수</h3>
+    <ul>
+        <li>on: 이벤트핸들러 연결</li>
+        <li>off: on으로 연결된 이벤트핸들러 제거</li>
+    </ul>
+    
+    <div id="test2" class="area">봄봄봄봄봄봄봄봄봄봄봄봄봄봄봄봄</div>
+    <style>
+    .area{
+        width:300px;
+        height: 300px;
+        background: orangered;
+    }
+    </style>
+    <script>
+        //1번
+    $("#test2").on("click",function(){
+     console.log($(this));
+
+     //off
+     $(this).off("mouseenter")
+            .off("mouseleave");
+    });
+//1번이랑 동일
+//2번
+    // $("#test2").click(function(){
+    //     console.log($(this));
+    // });
+
+    //bind : deprecated 사용하지 말것
+
+    //on : hover이벤트는 deprecated이므로 사용하지 말것.
+    $("#test2").on("mouseenter",function(){
+       $(this).css({"background":"black","color":"white"});
+    }).on("mouseleave",function(){
+        $(this).css({"background":"blue","color":"orangred"});
+    });
+    </script>
+
+    <h3>one메소드</h3>
+    <p>이벤트핸들링을 딱한번만 연결할때 사용한다.</p>
+    <button id="btnOne">한번만 클릭하세요</button>
+    <script>
+    $("#btnOne").one("click",function(){
+      alert("처음이자 마지막!!!")
+    });
+    </script>
+
+    <h3>$(선택자).on(event, selector, handler)</h3>
+
+    <div id="wrap">
+        <h2>머리글</h2>
+    </div>
+    <script>
+    //아래코드 실행기준으로 이벤트 핸들러가 연결됨.
+    //새로 생성된 h2태그들은 click이벤트 핸들러가 없음.    
+    // $("#wrap h2").click(function(){
+    //   $("#wrap").append("<h2>머리글</h2>");
+    // });
+    
+    // 부모타입에서 이벤트핸들러 연결
+    // 이벤트 버블링을 이용해서 처리하게 됨
+    // document 최상위
+    $("#wrap").on("click","h2",function(){
+        $("#wrap").append("<h2>머리글</h2>");
+    });
+    </script>
+
+    <h3>trigger()</h3>
+    <div id="trg">
+        클릭한 횟수 : <span>0</span>
+    </div>
+    <div id="other">저도 클릭해주세요!</div>
+    <a href="http://www.naver.com" onclick="foo();" id="goToNaver">네이버</a>
+    <button id="btnTrigger">트리거확인</button>
+    <script>
+    var cnt =0;
+    $("#trg").on("click",function(){
+      $(this).find("span").text(++cnt);
+    });
+
+    // 트리거
+    $("#other").click(function(){
+
+        //trigger함수는 실제 클릭을 하는 것이 아니라, click이벤트 핸들러 함수 호출!
+     $("#trg").trigger("click");
+    });
+    
+    // click 핸들러
+    function foo(){
+      console.log("clicked!!!!!!!!");
+    }
+
+    $("#btnTrigger").click(function(){
+       $("#goToNaver").trigger("click");
+    });
+    </script>
+</body>
+</html>
