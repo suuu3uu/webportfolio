@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@자기소개</title>
+    <script src="js/jquery-3.4.0.js"></script>
+    <style>
+    .top{width: 1024px; 
+      height: 100px;
+      background: yellowgreen;
+      border: 1px solid;
+      padding-left: 10px;
+      }
+    .container{width: 180px; height: 200px; 
+    border: 2px solid; 
+    float: right;
+    position: relative; top: 20px; left: -20px;
+    text-align: center;
+    overflow: hidden;
+    }
+    #img{width: 160px; height: 180px; padding: 10px;
+    position: relative; 
+    }  
+    #scan{width: 160px; height: 180px; padding: 10px;
+    position: relative; 
+    }  
+    #f1{float: left;}
+    #QR{font-size: 20px; position: relative; 
+    top: 207px;
+    left: 572px;}
+    .buttom{
+      width: 1024px; 
+      height: 100px;
+      background: yellowgreen;
+      position: relative;
+      top: 500px;
+      left: -9px;
+      border: 1px solid;
+      padding-left: 10px;
+    }
+    div>a{position: relative; left: 686px;
+    top: 76px;;}
+    
+    </style>
+</head>
+<body>
+  <div class="top">
+    <div>
+    <h2>자기소개 페이지</h2>
+</div>
+ 
+  <br>
+  <form action="" id="f1" >
+<h4>이름 : 정재훈</h4>
+<h4>생년월일 : 1991.11.29</h4>
+<h4>취미 : 운동,영화보기,노래</h4>
+<h4>주소 : 서울시 도봉구</h4>
+<h4>이메일 : suuu3uu@naver.com</h4>
+<h4>성격 : 활발하고 매사에 긍정적인 성격</h4>
+<h4>혈액형 : AB형</h4>
+<h4>관심사 : 여행</h4>
+<h4>전화번호 : 010-6331-4819</h4>
+
+</form>
+    <div class="container">
+    <img src="image/myphoto.jpg" alt=""  id="img">
+    <img src="image/scan.png" alt=""  id="scan">
+  </div>   
+  <h4 id="QR"><mark>QR코드로 확인</mark></h4>
+ 
+ 
+  <br><br>
+  <div class="buttom">
+    <a href="Index.html">뒤로가기</a>
+  </div>
+  </div>
+
+  <script>
+  $("#QR").click(function(){
+  //  $("#img").animate({"left":"-190px"},300,function(){
+  //    $("#scan").animate({"top":"-204px"},300)
+
+  //  });
+  $("#img").fadeToggle(100)
+   });
+
+
+  
+  
+ 
+  
+  </script>
+</body>
+</html>

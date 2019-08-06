@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-3.4.0.js"></script>
+    <style>
+        .full{width: 1024px}
+    .menu{margin:5px; float: left; }
+    #left{ width: 31%; height: 800px; background: yellowgreen; border: 1px solid; }
+    #center{width: 31%; height: 800px; background: rgb(230, 252, 187); border: 1px solid;}
+    #right{width: 31%; height: 800px; background: rgb(255, 106, 150); border: 1px solid;}
+    .text{font-size: 50px; writing-mode: vertical-lr; text-decoration:none; margin-top: 2px; color:black;}
+   #photo{width: 200px; height: 200px; transform: translateY(220px); position: static;}
+    
+    </style>
+</head>
+<body>
+    <div class="full">
+     <h2>홈페이지만들기</h2>
+     <hr>
+     <div id="left" class="menu">
+         <a href="@자기소개.html" class="text">About Me</a> 
+        </div>
+     <div id="center"class="menu">
+        <a href="@개발자로드맵.html" class="text">Developer Roadmap</a> 
+     </div>
+     <div id="right"class="menu">
+        <a href="@관심사.html" class="text">Interest</a> 
+     </div>
+    </div>
+
+<script>
+$("div>a").hover(function(){
+ $(this).css({"background":"yellow"}).animate({height: '600px'}, "slow");
+
+},function(){
+    $(this).css({"background":"none"}).animate({height: '500px'}, "10");
+});
+
+
+</script>
+
+
+</body>
+</html>
